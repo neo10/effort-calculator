@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 
-import AboutView from "@/views/AboutView.vue";
+import EffortCalculatorView from "@/views/EffortCalculator.vue";
 import HomeView from "@/views/HomeView.vue";
 
 const routes: RouteRecordRaw[] = [
@@ -11,9 +11,9 @@ const routes: RouteRecordRaw[] = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
-    component: AboutView,
+    path: "/effort-calc",
+    name: "effortCalc",
+    component: EffortCalculatorView,
   },
 ];
 
