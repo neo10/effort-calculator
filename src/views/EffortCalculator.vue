@@ -207,7 +207,7 @@ const businessSummary = computed(() => {
   </div>
   <!-- Result -->
 <div class="result-grid" v-if="!errorMessage">
-  <span class="label">Implementation:</span>
+  <span class="label">Implementation (PERT):</span>
   <span class="value">{{ result.implementation }} PT</span>
 
   <span class="label">Code Review:</span>
