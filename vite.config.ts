@@ -9,4 +9,13 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      "/api/random-quote": {
+        target: "https://zenquotes.io",
+        changeOrigin: true,
+        rewrite: () => "/api/random",
+      },
+    },
+  },
 });

@@ -30,8 +30,10 @@ npm run preview
 Create a `.env` file:
 
 ```bash
-VITE_API_BASE_URL=http://localhost:3000
+VITE_API_BASE_URL=/api
 ```
+
+For third-party APIs in local development, use Vite `server.proxy` entries and call them through `/api/...` routes.
 
 ## Project Structure
 
@@ -39,7 +41,7 @@ VITE_API_BASE_URL=http://localhost:3000
 src/
   assets/
   features/
-    health/
+    quotes/
       api/
   lib/
     api/
@@ -53,6 +55,8 @@ src/
 ## API Layer Best Practice
 
 - Keep HTTP setup in one place: `src/lib/api/httpClient.ts`
+- Keep endpoint strings in one place: `src/lib/api/endpoints.ts`
+- Use typed helpers for calls: `src/lib/api/request.ts`
 - Keep feature-specific API calls in `src/features/<feature>/api/*.ts`
 - Do not call APIs directly from many components
 - Never expose external API secrets in frontend code
