@@ -31,7 +31,7 @@ onMounted(() => {
 
 <template>
   <section class="card">
-    <h2>Welcome</h2>
+    <h2>Welcome!</h2>
     <p>This is a minimal Vue frontend with router, Pinia, and a REST API layer.</p>
 
     <div class="row">
