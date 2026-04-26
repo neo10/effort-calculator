@@ -9,6 +9,7 @@ import { RouterLink, RouterView } from "vue-router";
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/effort-calc">Aufwandsschätzer</RouterLink>
+        <RouterLink to="/bug-analysis">Bug Analyse</RouterLink>
       </nav>
     </header>
 
