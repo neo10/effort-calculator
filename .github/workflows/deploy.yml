@@ -30,15 +30,33 @@ jobs:
         run: npm run build
 
       - name: Setup SSH key and trust VPS host
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
         run: |
+          set +x
+          echo "::add-mask::$VPS_HOST"
+          echo "::add-mask::$VPS_SSH_PORT"
+
           mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" | tr -d '\r' > ~/.ssh/deploy_key
+          chmod 700 ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" | tr -d '\r' > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p "${{ secrets.VPS_SSH_PORT }}" -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -p "$VPS_SSH_PORT" -H "$VPS_HOST" >> ~/.ssh/known_hosts 2>/dev/null
 
       - name: Deploy dist via rsync
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
+          VPS_USER: ${{ secrets.VPS_USER }}
         run: |
+          set +x
+          echo "::add-mask::$VPS_HOST"
+          echo "::add-mask::$VPS_SSH_PORT"
+          echo "::add-mask::$VPS_USER"
+
           rsync -az --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.VPS_SSH_PORT }}" \
+            -e "ssh -i ~/.ssh/deploy_key -p $VPS_SSH_PORT" \
             dist/ \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/tools.philippbaars.de/
+            "$VPS_USER@$VPS_HOST:/var/www/tools.philippbaars.de/"
