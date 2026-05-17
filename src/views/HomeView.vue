@@ -32,7 +32,7 @@ onMounted(() => {
 <template>
   <section class="card">
     <h2>Welcome!</h2>
-    <p>This is a minimal Vue frontend with router, Pinia, and a REST API layer.</p>
+    <p>This is my webpage which hosts some useful tools.</p>
 
     <div class="row">
       <button type="button" @click="counter.increment">Count: {{ counter.count }}</button>
